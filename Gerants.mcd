@@ -1,0 +1,44 @@
+FAIT, 11 REMBOURSEMENT, 1N CLIENT
+CLIENT:id_client,nom_client,numero_client,type_client
+EFFECTUE DANS, 1N BANQUE, 11 VERSEMENT
+BANQUE:id_banque,nom_banque,nom_responsable,numero_responsable
+REALISE, 1N POMPISTE, 11 VENTE
+VENTE:id_vente,espece,TPE,credit,date_vente
+:
+
+REMBOURSEMENT:id_remboursement,date_remboursement,montant_remboursement,type_remboursement
+PREND, 1N CLIENT, 11 CREDIT
+VERSEMENT:id_versement,montant,date_versement,bordereau_versement
+EFFECTUE, 1N GERANT, 11 VERSEMENT
+POMPISTE:id_pompiste,prenom_pompiste,nom_pompiste,adresse_pompiste,telephone_pompiste,id_user,login,status
+PEUT AVOIR , 11 INDEX, 1N POMPISTE
+POMPE:id_pompe,libelle,status
+
+EST LIE, 1N CREDIT, 11 REMBOURSEMENT
+CREDIT:id_credit,libelle,type_credit,date_credit,montant
+OCTROIE ,0N GERANT, 1N CREDIT
+GERANT:id_gerant,prenom_gerant,nom_gerant,adresse_gerant,telephone_gerant,mail_gerant,id_user,login
+EMPLOIE , 1N  STATION, 11 POMPISTE
+INDEX:index_depart,index_fermeture,date_index
+ALIMENTE, 1N CUVE, 11  POMPE
+
+:
+DONNE, 0N DIRECTION, 1N CREDIT
+EST DONNE, 1N GERANT , 11 CREDIT
+GERE    ,  1N GERANT,  11 STATION
+STATION:id_station,nom_station,adresse_station,telephone_station,type_payement,statusbis_station,objectif,besoin,status
+AVOIR   , 1N STATION, 11 CUVE
+CUVE:id_cuve,capacite,status
+
+:
+DIRECTION:id_direction,nom_responsable
+PASSE , 11 COMMANDE, 1N DIRECTION
+COMMANDE:numero_commande,quantité,date_commande
+CONCERNE,11 COMMANDE, 1N PRODUIT
+PRODUIT:id_produit,nom,reference,prix
+CONTIENT, 11 CUVE, 1N  PRODUIT
+RATTACHE A , 11 CUVE, 11 INDEX
+
+:
+LIVRAISON:id_livraison,quantité,bon_livraison,voiture,chauffeur
+PROVIENT, 1N PRODUIT, 11 LIVRAISON

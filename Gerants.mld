@@ -1,0 +1,53 @@
+%%mocodo
+:::
+CLIENT: id_client, nom_client, numero_client, type_client
+:::
+BANQUE: id_banque, nom_banque, nom_responsable, numero_responsable
+:::
+VENTE: id_vente, espece, TPE, credit, date_vente, #id_pompiste->POMPISTE->id_pompiste
+:::
+
+
+:
+REMBOURSEMENT: id_remboursement, date_remboursement, montant_remboursement, type_remboursement, #id_client->CLIENT->id_client, #id_credit->CREDIT->id_credit
+:::
+VERSEMENT: id_versement, montant, date_versement, bordereau_versement, #id_gerant->GERANT->id_gerant, #id_banque->BANQUE->id_banque
+:::
+POMPISTE: id_pompiste, prenom_pompiste, nom_pompiste, adresse_pompiste, telephone_pompiste, id_user, login, status, #id_station->STATION->id_station
+:::
+POMPE: id_pompe, libelle, status, #id_cuve->CUVE->id_cuve
+:
+
+
+:::
+CREDIT: id_credit, libelle, type_credit, date_credit, montant, #id_client->CLIENT->id_client, #id_gerant->GERANT->id_gerant
+:
+OCTROIE: #id_gerant->GERANT->id_gerant, _#id_credit->CREDIT->id_credit
+:
+GERANT: id_gerant, prenom_gerant, nom_gerant, adresse_gerant, telephone_gerant, mail_gerant, id_user, login
+:::
+INDEX: index_depart, index_fermeture, date_index, #id_pompiste->POMPISTE->id_pompiste
+:::
+
+
+:::
+DONNE: #id_direction->DIRECTION->id_direction, _#id_credit->CREDIT->id_credit
+:::::
+STATION: id_station, nom_station, adresse_station, telephone_station, type_payement, statusbis_station, objectif, besoin, status, #id_gerant->GERANT->id_gerant
+:::
+CUVE: id_cuve, capacite, status, #id_produit->PRODUIT->id_produit, #index_depart->INDEX->index_depart, #id_station->STATION->id_station
+:
+
+
+:::
+DIRECTION: id_direction, nom_responsable
+:::
+COMMANDE: numero_commande, quantité, date_commande, #id_direction->DIRECTION->id_direction, #id_produit->PRODUIT->id_produit
+:::
+PRODUIT: id_produit, nom, reference, prix
+:::
+
+
+:::::::
+LIVRAISON: id_livraison, quantité, bon_livraison, voiture, chauffeur, #id_produit->PRODUIT->id_produit
+:::::::
